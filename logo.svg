@@ -1,0 +1,279 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Drop Shadow & Glow Filters -->
+    <filter id="shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.75" />
+    </filter>
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-bolt" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Substrate & Die Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1526" />
+      <stop offset="45%" stop-color="#070A14" />
+      <stop offset="100%" stop-color="#020306" />
+    </linearGradient>
+
+    <linearGradient id="border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.9" />
+      <stop offset="25%" stop-color="#38BDF8" stop-opacity="0.5" />
+      <stop offset="70%" stop-color="#8B5CF6" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#F43F5E" stop-opacity="0.8" />
+    </linearGradient>
+
+    <radialGradient id="ambient-cyan" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.20" />
+      <stop offset="40%" stop-color="#6366F1" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="die-surface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#060913" />
+    </linearGradient>
+
+    <linearGradient id="die-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.7" />
+    </linearGradient>
+
+    <!-- Telemetry Meter Gradients -->
+    <linearGradient id="cpu-gauge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <linearGradient id="ram-gauge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="50%" stop-color="#EC4899" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+
+    <!-- Pulse Waveform Gradient -->
+    <linearGradient id="pulse-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.4" />
+      <stop offset="20%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#FACC15" />
+      <stop offset="80%" stop-color="#EC4899" />
+      <stop offset="100%" stop-color="#00F2FE" stop-opacity="0.4" />
+    </linearGradient>
+
+    <linearGradient id="wave-fill-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#6366F1" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Central Lightning Mark Gradients -->
+    <linearGradient id="bolt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="15%" stop-color="#FEF08A" />
+      <stop offset="55%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EF4444" />
+    </linearGradient>
+
+    <linearGradient id="bolt-facet" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#FDE047" stop-opacity="0.15" />
+    </linearGradient>
+
+    <!-- Apple Glass Specular Curvature Highlight -->
+    <linearGradient id="glass-specular" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Substrate Micro-Grid Pattern -->
+    <pattern id="silicon-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#38BDF8" stroke-width="0.75" stroke-opacity="0.07" />
+    </pattern>
+  </defs>
+
+  <!-- Outer Apple macOS Squircle Container -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bg-grad)" stroke="url(#border-grad)" stroke-width="3.5" filter="url(#shadow)" />
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#ambient-cyan)" />
+
+  <!-- Substrate Micro-Traces (Symmetric Peripheral Interconnects) -->
+  <g opacity="0.5">
+    <!-- Top-Left Bus -->
+    <path d="M 52 112 H 88 L 112 136 H 124" fill="none" stroke="#00F2FE" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="52" cy="112" r="3.5" fill="#00F2FE" />
+    <path d="M 72 80 H 104 L 124 100 V 118" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+    <circle cx="72" cy="80" r="3" fill="#38BDF8" />
+    <path d="M 44 148 H 82 L 110 176 H 124" fill="none" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="44" cy="148" r="3.5" fill="#6366F1" />
+
+    <!-- Top-Right Bus -->
+    <path d="M 460 112 H 424 L 400 136 H 388" fill="none" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="460" cy="112" r="3.5" fill="#EC4899" />
+    <path d="M 440 80 H 408 L 388 100 V 118" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+    <circle cx="440" cy="80" r="3" fill="#8B5CF6" />
+    <path d="M 468 148 H 430 L 402 176 H 388" fill="none" stroke="#A855F7" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="468" cy="148" r="3.5" fill="#A855F7" />
+
+    <!-- Bottom-Left Bus -->
+    <path d="M 52 400 H 88 L 112 376 H 124" fill="none" stroke="#00F2FE" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="52" cy="400" r="3.5" fill="#00F2FE" />
+    <path d="M 72 432 H 104 L 124 412 V 394" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+    <circle cx="72" cy="432" r="3" fill="#10B981" />
+    <path d="M 44 364 H 82 L 110 336 H 124" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="44" cy="364" r="3.5" fill="#10B981" />
+
+    <!-- Bottom-Right Bus -->
+    <path d="M 460 400 H 424 L 400 376 H 388" fill="none" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="460" cy="400" r="3.5" fill="#EC4899" />
+    <path d="M 440 432 H 408 L 388 412 V 394" fill="none" stroke="#A855F7" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" />
+    <circle cx="440" cy="432" r="3" fill="#A855F7" />
+    <path d="M 468 364 H 430 L 402 336 H 388" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="468" cy="364" r="3.5" fill="#3B82F6" />
+  </g>
+
+  <!-- Peripheral Socket Contact Pins (4 Sides of Die) -->
+  <g fill="#334155" opacity="0.75">
+    <!-- Top Edge Pins -->
+    <rect x="156" y="66" width="9" height="10" rx="2.5" />
+    <rect x="180" y="66" width="9" height="10" rx="2.5" />
+    <rect x="204" y="66" width="9" height="10" rx="2.5" fill="#00F2FE" opacity="0.9" />
+    <rect x="228" y="66" width="9" height="10" rx="2.5" fill="#38BDF8" opacity="0.9" />
+    <rect x="275" y="66" width="9" height="10" rx="2.5" fill="#EC4899" opacity="0.9" />
+    <rect x="299" y="66" width="9" height="10" rx="2.5" fill="#A855F7" opacity="0.9" />
+    <rect x="323" y="66" width="9" height="10" rx="2.5" />
+    <rect x="347" y="66" width="9" height="10" rx="2.5" />
+
+    <!-- Bottom Edge Pins -->
+    <rect x="156" y="436" width="9" height="10" rx="2.5" />
+    <rect x="180" y="436" width="9" height="10" rx="2.5" />
+    <rect x="204" y="436" width="9" height="10" rx="2.5" fill="#10B981" opacity="0.9" />
+    <rect x="228" y="436" width="9" height="10" rx="2.5" fill="#00F2FE" opacity="0.9" />
+    <rect x="275" y="436" width="9" height="10" rx="2.5" fill="#3B82F6" opacity="0.9" />
+    <rect x="299" y="436" width="9" height="10" rx="2.5" fill="#8B5CF6" opacity="0.9" />
+    <rect x="323" y="436" width="9" height="10" rx="2.5" />
+    <rect x="347" y="436" width="9" height="10" rx="2.5" />
+
+    <!-- Left Edge Pins -->
+    <rect x="66" y="204" width="10" height="9" rx="2.5" fill="#00F2FE" opacity="0.9" />
+    <rect x="66" y="228" width="10" height="9" rx="2.5" fill="#38BDF8" opacity="0.9" />
+    <rect x="66" y="275" width="10" height="9" rx="2.5" fill="#10B981" opacity="0.9" />
+    <rect x="66" y="299" width="10" height="9" rx="2.5" fill="#00F2FE" opacity="0.9" />
+
+    <!-- Right Edge Pins -->
+    <rect x="436" y="204" width="10" height="9" rx="2.5" fill="#EC4899" opacity="0.9" />
+    <rect x="436" y="228" width="10" height="9" rx="2.5" fill="#A855F7" opacity="0.9" />
+    <rect x="436" y="275" width="10" height="9" rx="2.5" fill="#8B5CF6" opacity="0.9" />
+    <rect x="436" y="299" width="10" height="9" rx="2.5" fill="#3B82F6" opacity="0.9" />
+  </g>
+
+  <!-- Central Silicon Die Substrate (Centered at 256, 256) -->
+  <g id="silicon-die">
+    <rect x="80" y="80" width="352" height="352" rx="42" fill="url(#die-surface)" stroke="url(#die-border)" stroke-width="2.5" />
+    <rect x="80" y="80" width="352" height="352" rx="42" fill="url(#silicon-grid)" />
+
+    <!-- Corner Fiducial / Alignment Brackets -->
+    <path d="M 108 136 V 108 H 136" fill="none" stroke="#00F2FE" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+    <path d="M 404 136 V 108 H 376" fill="none" stroke="#EC4899" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+    <path d="M 108 376 V 404 H 136" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+    <path d="M 404 376 V 404 H 376" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+
+    <!-- Corner Alignment Targets -->
+    <circle cx="108" cy="108" r="3" fill="#00F2FE" opacity="0.9" />
+    <circle cx="404" cy="108" r="3" fill="#EC4899" opacity="0.9" />
+    <circle cx="108" cy="404" r="3" fill="#10B981" opacity="0.9" />
+    <circle cx="404" cy="404" r="3" fill="#A855F7" opacity="0.9" />
+
+    <!-- Core Architecture Status Cluster (Top & Bottom Silicon Modules) -->
+    <!-- Top P-Core Multi-Die Indicators -->
+    <g opacity="0.85">
+      <rect x="188" y="96" width="18" height="7" rx="2.5" fill="#00F2FE" filter="url(#glow-cyan)" />
+      <rect x="212" y="96" width="18" height="7" rx="2.5" fill="#00F2FE" />
+      <rect x="236" y="96" width="18" height="7" rx="2.5" fill="#38BDF8" />
+      <rect x="258" y="96" width="18" height="7" rx="2.5" fill="#38BDF8" />
+      <rect x="282" y="96" width="18" height="7" rx="2.5" fill="#8B5CF6" />
+      <rect x="306" y="96" width="18" height="7" rx="2.5" fill="#EC4899" filter="url(#glow-magenta)" />
+    </g>
+
+    <!-- Bottom Neural Engine / GPU Telemetry Cluster -->
+    <g opacity="0.85">
+      <rect x="188" y="409" width="18" height="7" rx="2.5" fill="#10B981" />
+      <rect x="212" y="409" width="18" height="7" rx="2.5" fill="#10B981" />
+      <rect x="236" y="409" width="18" height="7" rx="2.5" fill="#00F2FE" />
+      <rect x="258" y="409" width="18" height="7" rx="2.5" fill="#3B82F6" />
+      <rect x="282" y="409" width="18" height="7" rx="2.5" fill="#8B5CF6" />
+      <rect x="306" y="409" width="18" height="7" rx="2.5" fill="#F43F5E" filter="url(#glow-magenta)" />
+    </g>
+
+    <!-- Concentric Precision Telemetry Gauges (Centered at 256, 256) -->
+    <!-- Outer Track: Primary CPU / Hardware Load Gauge -->
+    <!-- Radius: 142, Circumference: 892.2 -->
+    <circle cx="256" cy="256" r="142" fill="none" stroke="#1E293B" stroke-width="11" stroke-dasharray="669 223" stroke-linecap="round" transform="rotate(135 256 256)" opacity="0.45" />
+    <circle cx="256" cy="256" r="142" fill="none" stroke="url(#cpu-gauge)" stroke-width="11" stroke-dasharray="520 892" stroke-linecap="round" transform="rotate(135 256 256)" filter="url(#glow-cyan)" />
+
+    <!-- Outer Gauge Radial Precision Tick Marks -->
+    <!-- Radius: 156, Circumference: 980.2 -->
+    <circle cx="256" cy="256" r="156" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="2.5 10" opacity="0.4" />
+
+    <!-- Middle Track: Unified RAM & Memory Bandwidth Gauge -->
+    <!-- Radius: 118, Circumference: 741.4 -->
+    <circle cx="256" cy="256" r="118" fill="none" stroke="#1E293B" stroke-width="8.5" stroke-dasharray="556 185" stroke-linecap="round" transform="rotate(135 256 256)" opacity="0.45" />
+    <circle cx="256" cy="256" r="118" fill="none" stroke="url(#ram-gauge)" stroke-width="8.5" stroke-dasharray="390 741" stroke-linecap="round" transform="rotate(135 256 256)" filter="url(#glow-magenta)" />
+
+    <!-- Inner Telemetry Channel Boundary Arc -->
+    <!-- Radius: 96 -->
+    <circle cx="256" cy="256" r="96" fill="none" stroke="#10B981" stroke-width="2.5" stroke-dasharray="10 8" opacity="0.45" />
+
+    <!-- Ambient Core Glow -->
+    <circle cx="256" cy="256" r="76" fill="#00F2FE" opacity="0.16" filter="url(#glow-cyan)" />
+    <circle cx="256" cy="256" r="52" fill="#FACC15" opacity="0.14" filter="url(#glow-bolt)" />
+
+    <!-- Dynamic Telemetry Waveform (Canvas Heartbeat Pulse) -->
+    <!-- Waveform Gradient Fill Glow -->
+    <path d="M 84 256 H 136 L 152 244 L 166 256 L 180 270 L 204 176 L 226 328 L 244 232 L 256 256 L 268 232 L 286 328 L 308 176 L 332 270 L 346 256 L 360 244 L 376 256 H 428 V 330 H 84 Z" fill="url(#wave-fill-grad)" />
+
+    <!-- Primary High-Luminance Telemetry Oscilloscope Pulse -->
+    <path d="M 84 256 H 136 L 152 244 L 166 256 L 180 270 L 204 176 L 226 328 L 244 232 L 256 256 L 268 232 L 286 328 L 308 176 L 332 270 L 346 256 L 360 244 L 376 256 H 428" fill="none" stroke="url(#pulse-grad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-cyan)" />
+
+    <!-- Apex Telemetry Data Nodes -->
+    <circle cx="204" cy="176" r="4.5" fill="#00F2FE" filter="url(#glow-cyan)" />
+    <circle cx="308" cy="176" r="4.5" fill="#38BDF8" filter="url(#glow-cyan)" />
+    <circle cx="226" cy="328" r="4" fill="#EC4899" filter="url(#glow-magenta)" />
+    <circle cx="286" cy="328" r="4" fill="#8B5CF6" filter="url(#glow-magenta)" />
+
+    <!-- Iconic Central Telemetry Lightning Mark (⚡) -->
+    <g id="central-lightning-mark">
+      <!-- High-Energy Outer Radiant Aura -->
+      <path d="M 270 152 L 216 252 H 252 L 236 360 L 298 238 H 262 Z" fill="#FACC15" opacity="0.45" filter="url(#glow-bolt)" />
+      
+      <!-- Solid Lightning Core Body -->
+      <path d="M 270 152 L 216 252 H 252 L 236 360 L 298 238 H 262 Z" fill="url(#bolt-grad)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" />
+      
+      <!-- Precision Beveled Internal Specular Facet -->
+      <path d="M 270 152 L 216 252 H 252 L 244 308 L 262 238 H 270 Z" fill="url(#bolt-facet)" />
+
+      <!-- Center Nexus Energy Spark -->
+      <circle cx="252" cy="252" r="4" fill="#FFFFFF" filter="url(#glow-bolt)" />
+    </g>
+  </g>
+
+  <!-- Apple Glass Specular Curvature Highlight -->
+  <path d="M 28 136 C 28 74 74 28 136 28 H 376 C 438 28 484 74 484 136 C 484 166 376 188 256 188 C 136 188 28 166 28 136 Z" fill="url(#glass-specular)" />
+</svg>
