@@ -125,6 +125,14 @@ def get_process_detail(pid: int, cached_process: Optional[dict] = None) -> dict[
             raise FileNotFoundError(f"Process with PID {pid} not found")
         except Exception:
             pass
+    else:
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            raise FileNotFoundError(f"Process with PID {pid} not found")
+        except PermissionError:
+            pass
+
 
     return {
         "process": proc_info,

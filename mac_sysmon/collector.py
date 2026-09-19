@@ -276,6 +276,10 @@ class MetricsCollector:
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 continue
 
+        # Prune dead PIDs from last_proc_io cache to prevent memory leak
+        active_pids = {p["pid"] for p in processes}
+        self.last_proc_io = {pid: v for pid, v in self.last_proc_io.items() if pid in active_pids}
+
         snapshot = {
             "timestamp": int(time.time() * 1000),
             "system_info": sys_info,
@@ -328,7 +332,8 @@ class MetricsCollector:
                     try:
                         res = listener(snapshot)
                         if asyncio.iscoroutine(res):
-                            asyncio.create_task(res)
+                            task = asyncio.create_task(res)
+                            task.add_done_callback(lambda t: None if t.cancelled() else t.exception())
                     except Exception as e:
                         pass
             except Exception as e:

@@ -22,6 +22,7 @@ class SysmonServer:
 
         self._setup_routes()
         self.collector.listeners.add(self._broadcast_metrics)
+        self.app.on_shutdown.append(self._on_shutdown)
 
     def _setup_routes(self):
         self.app.router.add_get("/api/system", self.handle_api_system)
@@ -102,7 +103,8 @@ class SysmonServer:
 
         # Check cached process info
         cached_proc = None
-        for p in self.collector.latest_metrics.get("processes", []):
+        latest = self.collector.latest_metrics or self.collector.collect()
+        for p in latest.get("processes", []):
             if p.get("pid") == pid:
                 cached_proc = p
                 break
@@ -169,14 +171,31 @@ class SysmonServer:
         if not self.ws_clients:
             return
 
-        payload = json.dumps(snapshot)
-        disconnected = set()
+        try:
+            payload = json.dumps(snapshot)
+            disconnected = set()
 
-        for ws in self.ws_clients:
-            try:
-                await ws.send_str(payload)
-            except Exception:
-                disconnected.add(ws)
+            for ws in list(self.ws_clients):
+                if ws.closed:
+                    disconnected.add(ws)
+                    continue
+                try:
+                    await ws.send_str(payload)
+                except Exception:
+                    disconnected.add(ws)
 
-        if disconnected:
-            self.ws_clients.difference_update(disconnected)
+            if disconnected:
+                self.ws_clients.difference_update(disconnected)
+        except Exception as e:
+            logger.warning(f"Error broadcasting metrics: {e}")
+
+    async def _on_shutdown(self, app: web.Application):
+        self.collector.listeners.discard(self._broadcast_metrics)
+        for ws in list(self.ws_clients):
+            if not ws.closed:
+                try:
+                    await ws.close(code=WSMsgType.CLOSE, message=b"Server shutdown")
+                except Exception:
+                    pass
+        self.ws_clients.clear()
+

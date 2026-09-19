@@ -12,7 +12,7 @@ if [ ! -x "$PYTHON_BIN" ]; then
 fi
 
 # Ensure dependencies are available
-if ! "$PYTHON_BIN" -c "import aiohttp" 2>/dev/null; then
+if ! "$PYTHON_BIN" -c "import aiohttp, psutil, websockets" 2>/dev/null; then
   echo "Installing Python dependencies (aiohttp, psutil, websockets)..."
   "$PYTHON_BIN" -m pip install --break-system-packages -r requirements.txt
 fi

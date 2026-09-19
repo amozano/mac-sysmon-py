@@ -5,7 +5,7 @@ import { DisksViewComponent } from './components/disks_view';
 import { MemoryViewComponent } from './components/memory_view';
 import { NavbarComponent } from './components/navbar';
 import { ProcessManagerComponent } from './components/process_manager';
-import { TabId } from './types';
+import { SystemMetrics, TabId } from './types';
 
 class MacSysmonApp {
   private client: SysmonClient;

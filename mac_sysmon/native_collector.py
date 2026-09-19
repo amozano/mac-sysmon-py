@@ -84,6 +84,7 @@ class NativeMacCollector:
         active_bytes = 0
         inactive_bytes = 0
         wired_bytes = 0
+        compressor_bytes = 0
 
         try:
             vm_out = subprocess.check_output(["vm_stat"], text=True)
@@ -96,13 +97,15 @@ class NativeMacCollector:
                     inactive_bytes = int(re.search(r"\d+", line).group(0)) * self.page_size
                 elif "Pages wired down:" in line:
                     wired_bytes = int(re.search(r"\d+", line).group(0)) * self.page_size
+                elif "Pages occupied by compressor:" in line:
+                    compressor_bytes = int(re.search(r"\d+", line).group(0)) * self.page_size
         except Exception:
             pass
 
-        used_bytes = wired_bytes + active_bytes
-        available_bytes = free_bytes + inactive_bytes
+        used_bytes = wired_bytes + active_bytes + compressor_bytes
+        available_bytes = max(0, total_bytes - used_bytes)
         if used_bytes == 0:
-            used_bytes = max(0, total_bytes - available_bytes)
+            used_bytes = max(0, total_bytes - (free_bytes + inactive_bytes))
 
         swap_total = 0
         swap_used = 0

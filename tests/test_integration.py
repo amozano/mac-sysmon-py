@@ -164,6 +164,21 @@ class TestMacSysmonIntegration(unittest.IsolatedAsyncioTestCase):
                 self.assertIn("memory", payload)
                 await ws.close()
 
+            # 8. Test concurrent WebSocket broadcast without Set changed size during iteration
+            async with session.ws_connect(f"ws://127.0.0.1:39123/ws") as ws1, \
+                       session.ws_connect(f"ws://127.0.0.1:39123/ws") as ws2:
+                snapshot = self.collector.collect()
+
+                async def _connect_transient():
+                    async with session.ws_connect(f"ws://127.0.0.1:39123/ws") as ws3:
+                        await ws3.receive_str()
+
+                await asyncio.gather(
+                    server._broadcast_metrics(snapshot),
+                    server._broadcast_metrics(snapshot),
+                    _connect_transient(),
+                )
+
         await runner.cleanup()
 
 
